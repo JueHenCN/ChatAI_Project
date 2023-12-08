@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/ChatAI_Console/ChatAI_Console.csproj
+/Test_WPF/Test_WPF.csproj
