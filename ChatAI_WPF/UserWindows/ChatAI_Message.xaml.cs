@@ -31,16 +31,11 @@ namespace ChatAI_WPF.UserWindows
             LoadSession(sessionId);
         }
 
-        private ChatSession bindingSession = null;
-
         private Paragraph aiChat = null;
 
         public void LoadSession(string sessionId)
         {
-            bindingSession = GlobalSessions.GetSessionByID(sessionId);
-
-            bindingSession.ChatReceived += SelSession_ChatReceived;
-            bindingSession.ChatEnd += SelSession_ChatEnd;
+            ChatSession bindingSession = GlobalSessions.GetSessionByID(sessionId);
 
             foreach (var item in bindingSession.History)
             {
@@ -53,18 +48,7 @@ namespace ChatAI_WPF.UserWindows
                     AppendAIMessage(item.Content);
                 }
             }
-
             //AppendAIMessage("你好我是你的人工智能助手 ChatGLM3");
-        }
-
-        private void SelSession_ChatReceived(string msg)
-        {
-            AppendAIMessage(msg);
-        }
-
-        private void SelSession_ChatEnd()
-        {
-            aiChat = null;
         }
 
         private void SendMessage()
@@ -74,7 +58,6 @@ namespace ChatAI_WPF.UserWindows
                 return;
             AppendUserMessage(msg);
             TextB_SendString.Clear();
-
 
         }
 
@@ -92,7 +75,12 @@ namespace ChatAI_WPF.UserWindows
             ListBoxChat.Items.Add(newItem);
         }
 
-        private void AppendAIMessage(string msg)
+        public void AIMessageChatEnd()
+        {
+            aiChat = null;
+        }
+
+        public void AppendAIMessage(string msg)
         {
             if (null != aiChat)
             {
@@ -117,11 +105,6 @@ namespace ChatAI_WPF.UserWindows
                 newItem.Content = stackPanel;
                 ListBoxChat.Items.Add(newItem);
             }
-        }
-
-        private void AiMessageEnd()
-        {
-            aiChat = null;
         }
 
         private void Btn_SendMessage_Click(object sender, RoutedEventArgs e)

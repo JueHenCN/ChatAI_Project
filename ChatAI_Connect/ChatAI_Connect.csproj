@@ -83,6 +83,9 @@
   <ItemGroup>
     <Compile Include="Connect\ChatSession.cs" />
     <Compile Include="Connect\JsonMessage.cs" />
+    <Compile Include="Connect\Message\IMessageProcessor.cs" />
+    <Compile Include="Connect\Message\Message_ChatEnd.cs" />
+    <Compile Include="Connect\Message\Message_ChatOutput.cs" />
     <Compile Include="Connect\TcpConn\TcpClientConn.cs" />
     <Compile Include="GlobalManage\GlobalConfig.cs" />
     <Compile Include="GlobalManage\GlobalConnect.cs" />

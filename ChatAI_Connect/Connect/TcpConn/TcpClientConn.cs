@@ -1,4 +1,5 @@
-﻿using ChatAI_Connect.LogManage;
+﻿using ChatAI_Connect.Connect.Message;
+using ChatAI_Connect.LogManage;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using TouchSocket.Core;
 using TouchSocket.Sockets;
-using LogLevel = ChatAI_Connect.LogManage.LogLevel;
 
 namespace ChatAI_Connect.Connect.TcpConn
 {

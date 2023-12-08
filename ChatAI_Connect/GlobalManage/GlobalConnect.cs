@@ -1,4 +1,5 @@
 ﻿using ChatAI_Connect.Connect;
+using ChatAI_Connect.Connect.Message;
 using ChatAI_Connect.Connect.TcpConn;
 using ChatAI_Connect.LogManage;
 using System;
@@ -13,6 +14,8 @@ namespace ChatAI_Connect.GlobalManage
     {
         public static TcpClientConn TcpClientConn = new TcpClientConn();
 
+        public static Dictionary<string, IMessageProcessor> MessageProcessorList;
+
         public static bool ConnectServer()
         {
             if (!TcpClientConn.IsConnected)
@@ -22,6 +25,27 @@ namespace ChatAI_Connect.GlobalManage
             }
             return true;
 
+        }
+
+        public static void AddMessageProcessor(List<IMessageProcessor> messageProcessors)
+        {
+            foreach (var item in messageProcessors)
+                AddMessageProcessor(item);
+        }
+
+        public static void AddMessageProcessor(IMessageProcessor[] messageProcessors)
+        {
+            foreach (var item in messageProcessors)
+                AddMessageProcessor(item);
+        }
+
+        public static void AddMessageProcessor(IMessageProcessor messageProcessor)
+        {
+            if (MessageProcessorList == null)
+                MessageProcessorList = new Dictionary<string, IMessageProcessor>();
+
+            if (!MessageProcessorList.ContainsKey(messageProcessor.MessageType))
+                MessageProcessorList.Add(messageProcessor.MessageType, messageProcessor);
         }
 
         public static void StartModel()
@@ -66,27 +90,9 @@ namespace ChatAI_Connect.GlobalManage
         public static void RevClientMessage(string msg)
         {
             var clientMsg = JsonMessage.DeserialMessage(msg);
-
-            ChatSession chatSession = GlobalSessions.GetSessionByID(clientMsg["session_id"]);
-
-            switch (clientMsg["type"])
+            if (MessageProcessorList.ContainsKey(clientMsg["type"]))
             {
-                case "console":
-                    if (bool.Parse(clientMsg["return_result"]))
-                    {
-                        LogHandler.Info(clientMsg["message"]);
-                    }
-                    else
-                    {
-                        LogHandler.Error(clientMsg["message"]);
-                    }
-                    break;
-                case "chat":
-                    chatSession.ChatReceived?.Invoke(clientMsg["message"]);
-                    break;
-                case "chat_end":
-                    chatSession.ChatEnd?.Invoke();
-                    break;
+                MessageProcessorList[clientMsg["type"]].ProcessMessage(clientMsg);
             }
         }
     }

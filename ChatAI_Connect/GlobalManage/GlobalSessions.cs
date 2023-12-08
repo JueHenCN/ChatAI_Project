@@ -57,48 +57,20 @@ namespace ChatAI_Connect.GlobalManage
             ChatSession chatSession = null;
             if (string.IsNullOrWhiteSpace(sessionId) || !SessionDic.ContainsKey(sessionId))
             {
-                chatSession = CreateSession();
+                CreateSession();
             }
-            else
-            {
-                chatSession = SessionDic[sessionId];
-            }
+
+            chatSession = SessionDic[sessionId];
 
             return chatSession;
         }
 
-        public static ChatSession CreateSession(string sessionName = "新的会话")
+        public static void CreateSession(string sessionName = "新的会话")
         {
             ChatSession chatSession = new ChatSession(Guid.NewGuid().ToString(), sessionName);
-            return chatSession;
+            SessionDic.Add(chatSession.SessionId, chatSession);
+
         }
-
-        public static void RevClientMessage(string msg)
-        {
-            var clientMsg = JsonMessage.DeserialMessage(msg);
-
-            ChatSession chatSession = GetSessionByID(clientMsg["session_id"]);
-
-            switch (clientMsg["type"])
-            {
-                case "console":
-                    if (bool.Parse(clientMsg["return_result"]))
-                    {
-                        LogHandler.Info(clientMsg["message"]);
-                    }
-                    else
-                    {
-                        LogHandler.Error(clientMsg["message"]);
-                    }
-                    break;
-                case "chat":
-                    chatSession.ChatReceived?.Invoke(clientMsg["message"]);
-                    break;
-                case "chat_end":
-                    chatSession.ChatEnd?.Invoke();
-                    break;
-            }
-        }   
 
     }
 }

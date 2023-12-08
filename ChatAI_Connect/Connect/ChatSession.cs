@@ -27,10 +27,6 @@ namespace ChatAI_Connect.Connect
 
         public List<ChatHistory> History;
 
-        public Action<string> ChatReceived;
-
-        public Action ChatEnd;
-
         public ChatSession() { }
 
         public ChatSession(string sessionId, string sessionName)
