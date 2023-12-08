@@ -1,0 +1,55 @@
+﻿<Window x:Class="ChatAI_WPF.ChatAI_Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        mc:Ignorable="d"
+        Title="ChatAI_Main" Height="450" Width="800" Loaded="Window_Loaded">
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <GridSplitter Grid.Column="1" Width="1" HorizontalAlignment="Stretch" Background="Gray"/>
+
+        <Grid x:Name="ShowWindow" Grid.Column="2">
+            <!--<local:ChatWindow Width="Auto"/>-->
+        </Grid>
+
+        <Grid Grid.Column="0" >
+            <hc:SideMenu HorizontalAlignment="Left" VerticalAlignment="Top"  Height="Auto" Width="100">
+                <hc:SideMenuItem x:Name="ChatHome" Header="主页" FontSize="16" MouseDown="ChatHome_MouseDown" >
+                    <hc:SideMenuItem.Icon>
+                        <Image Source ="{svgc:SvgImage Source=Resources/home.svg}" Width="32" Height="32" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+
+                <hc:SideMenuItem x:Name="ShowChatMessage" Header="聊天" FontSize="16"  MouseDown="ShowChatMessage_MouseDown">
+                    <hc:SideMenuItem.Icon>
+                        <Image Source ="{svgc:SvgImage Source=Resources/chat_message.svg}" Width="32" Height="32" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+
+                <hc:SideMenuItem x:Name="ShowSessionList" Header="通讯" FontSize="16" MouseDown="ShowSessionList_MouseDown">
+                    <hc:SideMenuItem.Icon>
+                        <Image Source ="{svgc:SvgImage Source=Resources/address.svg}" Width="32" Height="32" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+
+                <hc:SideMenuItem x:Name="ShowGlobalSetting" Header="配置" FontSize="16" MouseDown="ShowGlobalSetting_MouseDown">
+                    <hc:SideMenuItem.Icon>
+                        <Image Source ="{svgc:SvgImage Source=Resources/setting.svg}" Width="32" Height="32" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+            </hc:SideMenu>
+        </Grid>
+
+        
+
+    </Grid>
+</Window>
