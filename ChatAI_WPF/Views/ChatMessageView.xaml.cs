@@ -13,19 +13,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace ChatAI_WPF.UserWindows
+namespace ChatAI_WPF.Views
 {
     /// <summary>
     /// MessageWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ChatAI_Message : UserControl
+    public partial class ChatMessageView : UserControl
     {
-        public ChatAI_Message()
+        public ChatMessageView()
         {
             InitializeComponent();
         }
 
-        public ChatAI_Message(string sessionId)
+        public ChatMessageView(string sessionId)
         {
             InitializeComponent();
             LoadSession(sessionId);

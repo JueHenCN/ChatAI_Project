@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ChatAI_WPF.ViewModels;
+using Prism.Ioc;
+using Prism.Unity;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -11,7 +14,16 @@ namespace ChatAI_WPF
     /// <summary>
     /// App.xaml 的交互逻辑
     /// </summary>
-    public partial class App : Application
+    public partial class App : PrismApplication
     {
+        protected override void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.RegisterForNavigation<MainWindow, MainWindowViewModel>();
+        }
+
+        protected override Window CreateShell()
+        {
+            return Container.Resolve<MainWindow>();
+        }
     }
 }

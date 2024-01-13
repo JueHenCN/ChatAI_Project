@@ -6,14 +6,14 @@ using System.Windows.Controls;
 using MessageBox = HandyControl.Controls.MessageBox;
 using Growl = HandyControl.Controls.Growl;
 
-namespace ChatAI_WPF.UserWindows
+namespace ChatAI_WPF.Views
 {
     /// <summary>
     /// LocalSetting.xaml 的交互逻辑
     /// </summary>
-    public partial class ChatAI_GlobalSetting : UserControl
+    public partial class ChatGlobalSettingView : UserControl
     {
-        public ChatAI_GlobalSetting()
+        public ChatGlobalSettingView()
         {
             InitializeComponent();
         }
@@ -21,7 +21,7 @@ namespace ChatAI_WPF.UserWindows
         public void LoadConfig()
         {
             TextB_IPAddress.Text = GlobalConfig.Config.IpAddress;
-            TextB_Port.Text = GlobalConfig.Config.Port.ToString();
+            NumericUD_Port.Value = GlobalConfig.Config.Port;
             TextB_SessionFolder.Text = GlobalConfig.Config.SessionFolderPath;
             TextB_ModelPath.Text = GlobalConfig.Config.ModelPath;
             TextB_PythonPath.Text = GlobalConfig.Config.PythonPath;
@@ -30,7 +30,7 @@ namespace ChatAI_WPF.UserWindows
         public void SaveConfig()
         {
             GlobalConfig.Config.IpAddress = TextB_IPAddress.Text;
-            GlobalConfig.Config.Port = int.Parse(TextB_Port.Text);
+            GlobalConfig.Config.Port = (int)NumericUD_Port.Value;
             GlobalConfig.Config.SessionFolderPath = TextB_SessionFolder.Text;
             GlobalConfig.Config.ModelPath = TextB_ModelPath.Text;
             GlobalConfig.Config.PythonPath = TextB_PythonPath.Text;

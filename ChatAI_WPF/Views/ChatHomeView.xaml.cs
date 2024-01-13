@@ -13,16 +13,21 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ChatAI_WPF.UserWindows
+namespace ChatAI_WPF.Views
 {
     /// <summary>
     /// ChatAI_Home.xaml 的交互逻辑
     /// </summary>
-    public partial class ChatAI_Home : UserControl
+    public partial class ChatHomeView : UserControl
     {
-        public ChatAI_Home()
+        public ChatHomeView()
         {
             InitializeComponent();
+        }
+
+        private void Btn_AutoStart_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

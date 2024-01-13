@@ -7,27 +7,27 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace ChatAI_WPF.UserWindows
+namespace ChatAI_WPF.Views
 {
     /// <summary>
     /// ChatWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class ChatAI_ChatWindow : UserControl
+    public partial class ChatManageView : UserControl
     {
-        private Dictionary<string, ChatAI_Message> sessionWindow;
-        private Message_ChatEnd chatEnd;
-        private Message_ChatOutput chatOutputMsg;
+        private Dictionary<string, ChatMessageView> sessionWindow;
+        private MessageChatEnd chatEnd;
+        private MessageChatOutput chatOutputMsg;
 
-        public ChatAI_ChatWindow()
+        public ChatManageView()
         {
             InitializeComponent();
         }
 
         private void ChatWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            chatEnd = new Message_ChatEnd();
-            chatOutputMsg = new Message_ChatOutput();
-            sessionWindow = new Dictionary<string, ChatAI_Message>();
+            chatEnd = new MessageChatEnd();
+            chatOutputMsg = new MessageChatOutput();
+            sessionWindow = new Dictionary<string, ChatMessageView>();
 
             chatEnd.ChatEndAction += ChatEnd;
             chatOutputMsg.OutAIMessage += ChatOutputMsg;
@@ -77,7 +77,7 @@ namespace ChatAI_WPF.UserWindows
             newSessionButton.Click += NewSessionButton_Click; // 添加点击事件处理程序
             SessionList.Children.Add(newSessionButton); // 将新按钮添加到WrapPanel中
 
-            ChatAI_Message messageWindow = new ChatAI_Message(); // 创建新的消息窗口
+            ChatMessageView messageWindow = new ChatMessageView(); // 创建新的消息窗口
             sessionWindow.Add(sessionId, messageWindow); // 将新的消息窗口添加到字典中
         }
 
@@ -85,7 +85,7 @@ namespace ChatAI_WPF.UserWindows
         {
             string sessionId = (sender as Button).Tag.ToString(); // 获取GUID
             MessageShow.Children.Clear(); // 清空消息显示区域
-            ChatAI_Message messageWindow = sessionWindow[sessionId]; // 获取消息窗口
+            ChatMessageView messageWindow = sessionWindow[sessionId]; // 获取消息窗口
             messageWindow.LoadSession(sessionId); // 加载会话
             MessageShow.Children.Add(messageWindow); // 将消息窗口添加到消息显示区域
         }

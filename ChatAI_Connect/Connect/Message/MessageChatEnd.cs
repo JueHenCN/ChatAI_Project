@@ -4,15 +4,15 @@ using System.Collections.Generic;
 
 namespace ChatAI_WPF.Source.Message
 {
-    public class Message_ChatEnd : IMessageProcessor
+    public class MessageChatEnd : IMessageProcessor
     {
         public Action<string> ChatEndAction;
 
         public string MessageType => "chat_end";
 
-        public void ProcessMessage(Dictionary<string, string> msgData)
+        public void ProcessMessage(Dictionary<string, string> messageData)
         {
-            ChatEndAction?.Invoke(msgData["tag"]);
+            ChatEndAction?.Invoke(messageData["tag"]);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChatAI_WPF.Source.Message
 {
-    public class Message_ChatOutput : IMessageProcessor
+    public class MessageChatOutput : IMessageProcessor
     {
         public Action<string, string> OutAIMessage;
 

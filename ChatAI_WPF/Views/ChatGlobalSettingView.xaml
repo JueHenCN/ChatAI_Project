@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="ChatAI_WPF.UserWindows.ChatAI_GlobalSetting"
+﻿<UserControl x:Class="ChatAI_WPF.Views.ChatGlobalSettingView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ChatAI_WPF.UserWindows"
+             xmlns:local="clr-namespace:ChatAI_WPF.Views"
              xmlns:hc="https://handyorg.github.io/handycontrol"
              xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
              mc:Ignorable="d" 
@@ -25,23 +25,26 @@
             <TextBlock Text="参数配置" FontSize="20" FontWeight="Bold" Margin="0,0,0,5" Grid.Row="0"/>
 
             <StackPanel hc:TitleElement.TitleWidth="168" Margin="20,15,20,15" Grid.Row="2">
-                <TextBox hc:TitleElement.Title="IP地址" hc:TitleElement.TitlePlacement="Left" 
-                         Style="{StaticResource TextBoxExtend}" IsReadOnly="True"
-                         x:Name="TextB_IPAddress"
+                <hc:TextBox hc:TitleElement.Title="服务端IP地址" hc:TitleElement.TitlePlacement="Left" 
+                            Style="{StaticResource TextBoxExtend}" IsReadOnly="True"
+                            x:Name="TextB_IPAddress" HorizontalContentAlignment="Center"
+                            Text="127.0.0.1"
                          />
-                <TextBox hc:TitleElement.Title="通讯端口" hc:TitleElement.TitlePlacement="Left" 
-                         Style="{StaticResource TextBoxExtend}" IsReadOnly="True" Margin="0,6,0,0"
-                         x:Name="TextB_Port"
-                         />
+                <hc:NumericUpDown hc:TitleElement.Title="服务端通讯端口" hc:TitleElement.TitlePlacement="Left" 
+                                  Style="{StaticResource NumericUpDownExtend}" x:Name="NumericUD_Port" Margin="0,6,0,0"
+                                  Minimum="0" Maximum="65525" Value="8765" HorizontalContentAlignment="Center"
+                                  ValueFormat="0"
+                                  />
 
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox hc:TitleElement.Title="运行模型" hc:TitleElement.TitlePlacement="Left" 
-                             Style="{StaticResource TextBoxExtend}" Grid.Column="0" 
-                             IsReadOnly="True" Margin="0,6,0,0" x:Name="TextB_ModelPath"
+                    <hc:TextBox hc:TitleElement.Title="运行模型位置" hc:TitleElement.TitlePlacement="Left" 
+                                Style="{StaticResource TextBoxExtend}" Grid.Column="0" 
+                                IsReadOnly="True" Margin="0,6,0,0" x:Name="TextB_ModelPath"
+                                HorizontalContentAlignment="Center"
                              />
                     <Button Grid.Column="1" Margin="0,6,0,0" Tag="ModelPath" Click="SelFolder_Click">
                         <Image Source ="{svgc:SvgImage Source=Resources/sel_folder.svg}" Width="16" Height="16"/>
@@ -53,9 +56,11 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox hc:TitleElement.Title="Python解释器" hc:TitleElement.TitlePlacement="Left" 
-                             Style="{StaticResource TextBoxExtend}" Grid.Column="0" 
-                             IsReadOnly="True" Margin="0,6,0,0" x:Name="TextB_PythonPath"
+                    
+                    <hc:TextBox hc:TitleElement.Title="Python解释器" hc:TitleElement.TitlePlacement="Left" 
+                                Style="{StaticResource TextBoxExtend}" Grid.Column="0" 
+                                IsReadOnly="True" Margin="0,6,0,0" x:Name="TextB_PythonPath"
+                                HorizontalContentAlignment="Center"
                              
                              />
                     <Button Grid.Column="1" Margin="0,6,0,0" Tag="PythonPath" Click="SelFolder_Click">
@@ -63,22 +68,22 @@
                     </Button>
                 </Grid>
 
-                
-
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="Auto"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox hc:TitleElement.Title="本地会话文件夹" hc:TitleElement.TitlePlacement="Left" 
-                             Style="{StaticResource TextBoxExtend}" Grid.Column="0"
-                             IsReadOnly="True" Margin="0,6,0,0" x:Name="TextB_SessionFolder"
+                    <hc:TextBox hc:TitleElement.Title="本地会话文件夹" hc:TitleElement.TitlePlacement="Left" 
+                                Style="{StaticResource TextBoxExtend}" Grid.Column="0"
+                                IsReadOnly="True" Margin="0,6,0,0" x:Name="TextB_SessionFolder"
+                                HorizontalContentAlignment="Center"
                              
                              />
                     <Button Grid.Column="1" Margin="0,6,0,0" Tag="SessionFolderPath" Click="SelFolder_Click">
                         <Image Source ="{svgc:SvgImage Source=Resources/sel_folder.svg}" Width="16" Height="16"/>
                     </Button>
                 </Grid>
+                
                 <Grid HorizontalAlignment="Right">
                     <Button Grid.Column="1" Margin="0,30,0,0" Tag="GetSessionFolder" x:Name="Btn_SaveConfig" Click="Btn_SaveConfig_Click"
                             Content="保存配置" Style="{StaticResource ButtonPrimary}"

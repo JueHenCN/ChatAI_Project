@@ -1,14 +1,23 @@
-﻿<Window x:Class="ChatAI_WPF.ChatAI_Main"
+﻿<Window x:Class="ChatAI_WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:svgc="http://sharpvectors.codeplex.com/svgc/"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:prism="http://prismlibrary.com/"
         mc:Ignorable="d"
-        Title="ChatAI_Main" Height="450" Width="800" Loaded="Window_Loaded">
+        Title="ChatAI_Main" Height="450" Width="800">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <prism:InvokeCommandAction Command="{Binding LoadedCommand}" />
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
     
     <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100" />
             <ColumnDefinition Width="Auto" />
@@ -17,11 +26,13 @@
 
         <GridSplitter Grid.Column="1" Width="1" HorizontalAlignment="Stretch" Background="Gray"/>
 
-        <Grid x:Name="ShowWindow" Grid.Column="2">
+        <Grid Grid.Column="2">
             <!--<local:ChatWindow Width="Auto"/>-->
+            <ContentControl prism:RegionManager.RegionName="ChatViewRegion" />
         </Grid>
 
         <Grid Grid.Column="0" >
+            
             <hc:SideMenu HorizontalAlignment="Left" VerticalAlignment="Top"  Height="Auto" Width="100">
                 <hc:SideMenuItem x:Name="ChatHome" Header="主页" FontSize="16" MouseDown="ChatHome_MouseDown" >
                     <hc:SideMenuItem.Icon>
@@ -44,6 +55,12 @@
                 <hc:SideMenuItem x:Name="ShowGlobalSetting" Header="配置" FontSize="16" MouseDown="ShowGlobalSetting_MouseDown">
                     <hc:SideMenuItem.Icon>
                         <Image Source ="{svgc:SvgImage Source=Resources/setting.svg}" Width="32" Height="32" />
+                    </hc:SideMenuItem.Icon>
+                </hc:SideMenuItem>
+
+                <hc:SideMenuItem x:Name="ShowLogWindow" Header="日志" FontSize="16" MouseDown="ShowLogWindow_MouseDown">
+                    <hc:SideMenuItem.Icon>
+                        <Image Source ="{svgc:SvgImage Source=Resources/log.svg}" Width="32" Height="32" />
                     </hc:SideMenuItem.Icon>
                 </hc:SideMenuItem>
             </hc:SideMenu>

@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ChatAI_WPF.UserWindows.ChatAI_Message"
+﻿<UserControl x:Class="ChatAI_WPF.Views.ChatMessageView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -53,12 +53,12 @@
             </Grid>
 
             <Grid Grid.Column="1">
-                <Button x:Name="Btn_SendMessage" Click="Btn_SendMessage_Click" Height="70" >
+                <hc:ProgressButton  x:Name="Btn_SendMessage" Click="Btn_SendMessage_Click" Height="70" IsChecked="False" >
                     <Image  Source ="{svgc:SvgImage Source=Resources/send.svg}" Height="50" Width="50" />
-                    <Button.ToolTip>
+                    <hc:ProgressButton.ToolTip>
                         <ToolTip Content="发送消息" />
-                    </Button.ToolTip>
-                </Button>
+                    </hc:ProgressButton.ToolTip>
+                </hc:ProgressButton>
             </Grid>
 
 
